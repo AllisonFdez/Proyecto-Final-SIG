@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Campus Montegancedo - UPM</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <!-- Leaflet -->
+    <script src="https://kit.fontawesome.com/cf927ca245.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <!-- Sidebar -->
+    <link rel="stylesheet" href="./css/leaflet-sidebar.css" />
+    <script src="./js/leaflet-sidebar.js"></script>
+
+    <!-- Mouse Position -->
+    <link rel="stylesheet" href="./Leaflet.MousePosition-master/src/L.Control.MousePosition.css" />
+    <script src="./Leaflet.MousePosition-master/src/L.Control.MousePosition.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+
+    <!-- 3D Representation - Cesium -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.76/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.76/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding: 0; margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%; font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+        }
+
+        html, body, #cesiumContainer {
+            width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+        }
+
+        .lorem {
+            font-style: italic; color: #AAA;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+                <li><a href="#messages" role="tab"><i class="fa fa-cube"></i></a></li>
+                <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+            </ul>
+
+            <ul role="tablist">
+                <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    sidebar-v2
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                <p>A responsive sidebar for mapping libraries like <a href="http://leafletjs.com/">Leaflet</a> or <a href="http://openlayers.org/">OpenLayers</a>.</p>
+
+                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+            </div>
+
+            <div class="sidebar-pane" id="profile">
+                <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+
+            <div class="sidebar-pane" id="messages">
+                <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+
+            <div class="sidebar-pane" id="settings">
+                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+        </div>
+    </div>
+
+    <div id="map" class="sidebar-map"></div>
+    
+
+    <script>
+         var map = L.map('map').setView([40.40539, -3.83474], 16.5);
+        
+        //MousePosition
+        var mousePosition = new L.Control.MousePosition().addTo(map);	
+
+        var popup = L.popup();
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("Coordenadas geográficas: " + e.latlng.toString()+ '<br/> Coordenadas del pixel: ' + e.layerPoint)
+                .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+        // Cesium - 3D representation
+        /*var viewer = new Cesium.Viewer('map', {
+            terrainProvider : new Cesium.CesiumTerrainProvider({
+                url : Cesium.IonResource.fromAssetId(1),
+            }),
+            animation: false,
+            timeline: false
+        });
+        viewer.scene.primitives.add(Cesium.createOsmBuildings());
+        var initialPosition = Cesium.Cartesian3.fromDegrees(
+            -3.83600,40.40050,  1000
+        );
+        var initialOrientation = new Cesium.HeadingPitchRoll.fromDegrees(
+        21.27879878293835,
+        -21.34390550872461,
+        0.0716951918898415
+        );
+        viewer.scene.camera.setView({
+            destination: initialPosition,
+            orientation: initialOrientation,
+            endTransform: Cesium.Matrix4.IDENTITY,
+        });
+        viewer.scene.primitives.add(Cesium.createOsmBuildings({
+            style: new Cesium.Cesium3DTileStyle({
+                color: {
+                    conditions: [
+                        ["${feature['building']} === 'hospital'", "color('#7741FF')"],
+                        ["${feature['building']} === 'office'", "color('#FFFF00')"],
+                        ["${feature['building']} === 'school'", "color('#FFC300')"],
+                        ["${feature['building']} === 'apartments'", "color('#32FF00')"],
+                        ["${feature['name']} === 'Teatro Real'", "color('#FF5733')"],
+                        [true, "color('#B3000E')"]
+                    ]
+                }
+            })
+        }));*/
+
+        var openStreet = L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+            maxZoom: 20,
+            attribution: 'OSGEO'
+        })
+        openStreet.addTo(map);
+        	
+        var PNOA = L.tileLayer.wms("http://www.ign.es/wms-inspire/pnoa-ma",{layers:'OI.OrthoimageCoverage', format: 
+        'image/jpeg',transparent: true, attribution: "PNOA"});
+        var BASE = L.tileLayer.wms("https://www.ign.es/wms-inspire/ign-base?SERVICE=WMS&",{layers:'IGNBaseTodo', format: 
+        'image/jpeg',transparent: true, attribution: "BASE"});
+        var BASE2 = L.tileLayer.wms("https://www.ign.es/wms-inspire/ign-base?SERVICE=WMS&",{layers:'IGNBaseTodo-nofondo', format: 
+        'image/jpeg',transparent: true, attribution: "BASE2"});
+        var RASTER = L.tileLayer.wms("http://www.ign.es/wms-inspire/mapa-raster?SERVICE=WMS&",{layers:'Fondo', format: 
+        'image/jpeg',transparent: true, attribution: "RASTER"});
+        var SUELO = L.tileLayer.wms("https://servicios.idee.es/wms-inspire/ocupacion-suelo?SERVICE=WMS&",{layers:'LC.LandCoverSurfaces', format: 
+        'image/jpeg',transparent: true, attribution: "SUELO"});
+
+        var Carreteras = L.tileLayer.wms("https://servicios.idee.es/wms-inspire/transportes?TN.RoadTransportNetwork.RoadLink", {layers: 
+        'TN.RoadTransportNetwork.RoadLink',format:'image/png', transparent: true,attribution: "Carreteras"});
+        var overlays = {"Carreteras": Carreteras, "SUELO": SUELO, "BASE2": BASE2};			
+        var baseLayers = {"OSGEO": openStreet,"PNOA": PNOA, "RASTER": RASTER, "BASE": BASE};
+        L.control.layers(baseLayers,overlays).addTo(map);
+
+        var sidebar = L.control.sidebar('sidebar').addTo(map);
+    </script>
+</body>
+</html>
