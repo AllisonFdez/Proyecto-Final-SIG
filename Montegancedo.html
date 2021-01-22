@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <title>Campus Montegancedo - UPM</title>
+    <link rel="shortcut icon" href="./Logo.png" type="image/gif" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
 
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
     <!-- Leaflet -->
     <script src="https://kit.fontawesome.com/cf927ca245.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -25,6 +30,10 @@
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.76/Build/Cesium/Cesium.js"></script>
     <link href="https://cesium.com/downloads/cesiumjs/releases/1.76/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 
+    <div class="topnav">
+        <a style="color:#000000; font-weight:bold; text-align: center;"><i class="fa fa-globe-europe"></i> Proyecto Final - Campus Montegancedo por Allison Fernández.</a>
+    </div>
+
     <style>
         body {
             padding: 0; margin: 0;
@@ -41,6 +50,28 @@
         .lorem {
             font-style: italic; color: #AAA;
         }
+        .topnav {
+                background-color: #FFC300;
+                overflow: hidden;
+                text-align: center;
+                padding-left: 40px;
+        }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 10px 12px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold
+        }
+        .topnav span {
+            float: right;
+            color: #f2f2f2;
+            text-align: center;
+            font-size: 17px;
+            padding-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -49,46 +80,41 @@
         <div class="sidebar-tabs">
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-                <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
-                <li><a href="#messages" role="tab"><i class="fa fa-cube"></i></a></li>
-                <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://www.google.com/maps/d/u/0/edit?mid=16Vno3R0BU20A9zccOOiBsmEx1qhVzf97&usp=sharing" role="tab"  target="_blank"><i class="fas fa-map-marked-alt"></i></a></li>
+                <li><a href="./Montegancedo3D.html" role="tab"  target="_blank"><i class="fa fa-cube tooltipped"></i></a></li>
+                <li><a href="https://github.com/AllisonFdez/Proyecto-Final-SIG" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
             </ul>
 
-            <ul role="tablist">
+            <!-- <ul role="tablist">
                 <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
-            </ul>
+            </ul> -->
         </div>
 
         <!-- Tab panes -->
         <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
                 <h1 class="sidebar-header">
-                    sidebar-v2
+                    Campus Montegancedo - UPM
                     <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
 
-                <p>A responsive sidebar for mapping libraries like <a href="http://leafletjs.com/">Leaflet</a> or <a href="http://openlayers.org/">OpenLayers</a>.</p>
+                <br><p>Visualizador WEB del Campus de Montegancedo de la UPM. Parte del Proyecto Final de la Asignatura SIG en la WEB
+                    presentado por Allison Fernández del Programa MUSS.</p>
 
-                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-
-            </div>
-
-            <div class="sidebar-pane" id="profile">
-                <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            </div>
-
-            <div class="sidebar-pane" id="messages">
-                <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            </div>
-
-            <div class="sidebar-pane" id="settings">
-                <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                <p class="lorem">
+                    <br>Este visualizador consume un Servicio WMS local, creado con Geoserver, además del servicios del IGN, el de IDEE 
+                    y la capa base que ofrece OpenStreet Maps. Además, cuenta con opciones de controlo como Zoom y esta barra de contenido.<br><br> 
+                    
+                    <b>Los iconos de esta barra, ofrecen:</b><br><br>
+                        <b>~</b> Acceso directo a la visualización en 3D del campus que se desarrolló con Cesium JS.<br>
+                        <b>~</b> Una vista en Google Maps del campus.<br> 
+                        <b>~</b> Al repositorio en github con el código fuente del proyecto.<br> 
+                </p>
             </div>
         </div>
     </div>
 
     <div id="map" class="sidebar-map"></div>
-    
 
     <script>
          var map = L.map('map').setView([40.40539, -3.83474], 16.5);
@@ -100,70 +126,89 @@
         function onMapClick(e) {
             popup
                 .setLatLng(e.latlng)
-                .setContent("Coordenadas geográficas: " + e.latlng.toString()+ '<br/> Coordenadas del pixel: ' + e.layerPoint)
+                .setContent("<b>Coordenadas geográficas: </b><br>" + e.latlng)
                 .openOn(map);
         }
 
         map.on('click', onMapClick);
 
-        // Cesium - 3D representation
-        /*var viewer = new Cesium.Viewer('map', {
-            terrainProvider : new Cesium.CesiumTerrainProvider({
-                url : Cesium.IonResource.fromAssetId(1),
-            }),
-            animation: false,
-            timeline: false
-        });
-        viewer.scene.primitives.add(Cesium.createOsmBuildings());
-        var initialPosition = Cesium.Cartesian3.fromDegrees(
-            -3.83600,40.40050,  1000
-        );
-        var initialOrientation = new Cesium.HeadingPitchRoll.fromDegrees(
-        21.27879878293835,
-        -21.34390550872461,
-        0.0716951918898415
-        );
-        viewer.scene.camera.setView({
-            destination: initialPosition,
-            orientation: initialOrientation,
-            endTransform: Cesium.Matrix4.IDENTITY,
-        });
-        viewer.scene.primitives.add(Cesium.createOsmBuildings({
-            style: new Cesium.Cesium3DTileStyle({
-                color: {
-                    conditions: [
-                        ["${feature['building']} === 'hospital'", "color('#7741FF')"],
-                        ["${feature['building']} === 'office'", "color('#FFFF00')"],
-                        ["${feature['building']} === 'school'", "color('#FFC300')"],
-                        ["${feature['building']} === 'apartments'", "color('#32FF00')"],
-                        ["${feature['name']} === 'Teatro Real'", "color('#FF5733')"],
-                        [true, "color('#B3000E')"]
-                    ]
+        //Distance
+        var firstLatLng, secondLatLng;
+
+            function medirDistancia() {
+                var distance = map.distance(firstLatLng ,secondLatLng)
+                popup
+                    .setLatLng(secondLatLng)
+                    .setContent('<b>Punto: B</b><br/>' + secondLatLng + '<br/><b>Distancia: </b><br>' + distance)
+                    .openOn(map);
+            }
+
+            L.marker([40.405106, -3.834143]).addTo(map).bindPopup('<b>Campus de Montegancedo - UPM</b>').openPopup();
+
+            map.on('click', function(e) {
+                if (!firstLatLng) {
+                    firstLatLng = e.latlng;
+                    L.marker(firstLatLng).addTo(map).bindPopup('<b>Punto: A</b><br/>' + e.latlng).openPopup();
+                } else {
+                    secondLatLng = e.latlng;
+                    L.marker(secondLatLng).addTo(map)
+                }
+            
+                if (firstLatLng && secondLatLng) {
+                // Dibuja una linea entre los dos puntos.
+                    L.polyline([firstLatLng, secondLatLng], {
+                        color: '#FFC300'
+                    }).addTo(map);
+                
+                    medirDistancia();
+                    firstLatLng = ''
+                    secondLatLng = ''
                 }
             })
-        }));*/
 
         var openStreet = L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
             maxZoom: 20,
-            attribution: 'OSGEO'
+            attribution: 'openStreet'
         })
         openStreet.addTo(map);
-        	
+
+        // Servicios WMS del Catastro, IDEE e IGN.
         var PNOA = L.tileLayer.wms("http://www.ign.es/wms-inspire/pnoa-ma",{layers:'OI.OrthoimageCoverage', format: 
         'image/jpeg',transparent: true, attribution: "PNOA"});
-        var BASE = L.tileLayer.wms("https://www.ign.es/wms-inspire/ign-base?SERVICE=WMS&",{layers:'IGNBaseTodo', format: 
-        'image/jpeg',transparent: true, attribution: "BASE"});
-        var BASE2 = L.tileLayer.wms("https://www.ign.es/wms-inspire/ign-base?SERVICE=WMS&",{layers:'IGNBaseTodo-nofondo', format: 
-        'image/jpeg',transparent: true, attribution: "BASE2"});
+        var BaseIGN = L.tileLayer.wms("https://www.ign.es/wms-inspire/ign-base?SERVICE=WMS&",{layers:'IGNBaseTodo', format: 
+        'image/jpeg',transparent: true, attribution: "BaseIGN"});
         var RASTER = L.tileLayer.wms("http://www.ign.es/wms-inspire/mapa-raster?SERVICE=WMS&",{layers:'Fondo', format: 
         'image/jpeg',transparent: true, attribution: "RASTER"});
-        var SUELO = L.tileLayer.wms("https://servicios.idee.es/wms-inspire/ocupacion-suelo?SERVICE=WMS&",{layers:'LC.LandCoverSurfaces', format: 
-        'image/jpeg',transparent: true, attribution: "SUELO"});
+        var Catastro = L.tileLayer.wms("http://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx",{layers:'Catastro', format: 
+        'image/jpeg',transparent: true, attribution: "Catastro"})
 
+        // Servicio WMS - local
+        var TramoVial = L.tileLayer.wms("http://localhost:8080/geoserver/ows?service=WMS&",{layers:'rt_tramo_vial', format: 
+        'image/jpeg',transparent: true, attribution: "Tramo Vial", crs: L.CRS.EPSG4326})
+        var Limites = L.tileLayer.wms("http://localhost:8080/geoserver/ows?service=WMS&",{layers:'ll_municipales_inspire_peninbal_etrs89', format: 
+        'image/jpeg',transparent: true, attribution: "Limites",crs: L.CRS.EPSG4326})
+        var Comunidades = L.tileLayer.wms("http://localhost:8080/geoserver/ows?service=WMS&",{layers:'se89_10_admin_ccaa_provincias', format: 
+        'image/jpeg',transparent: true, attribution: "Comunidadesas", crs: L.CRS.EPSG4326})
+        var Provincias = L.tileLayer.wms("http://localhost:8080/geoserver/ows?service=WMS&",{layers:'se89_10_admin_cela_estados', format: 
+        'image/jpeg',transparent: true, attribution: "Provincias", crs: L.CRS.EPSG4326})
+        var Municipios = L.tileLayer.wms("http://localhost:8080/geoserver/ows?service=WMS&",{layers:'recintos_municipales_inspire_peninbal_etrs89', format: 
+        'image/jpeg',transparent: true, attribution: "Municipios",crs: L.CRS.EPSG4326})
+        var Edificios = L.tileLayer.wms("http://localhost:8080/geoserver/ows?service=WMS&",{layers:'BCN0507S_EDIFIC_polygon', format: 
+        'image/jpeg',transparent: true, attribution: "Edificios", crs: L.CRS.EPSG3857})
+        var Cambios = L.tileLayer.wms("http://localhost:8080/geoserver/ows?service=WMS&",{layers:'ES001L2_MADRID_Change_2006_2012', format: 
+        'image/jpeg',transparent: true, attribution: "Cambios"})
+        
+        // Capas
+        var Suelo = L.tileLayer.wms("https://servicios.idee.es/wms-inspire/ocupacion-suelo?SERVICE=WMS&",{layers:'LC.LandCoverSurfaces', format: 
+        'image/jpeg',transparent: true, attribution: "Suelo"});
         var Carreteras = L.tileLayer.wms("https://servicios.idee.es/wms-inspire/transportes?TN.RoadTransportNetwork.RoadLink", {layers: 
         'TN.RoadTransportNetwork.RoadLink',format:'image/png', transparent: true,attribution: "Carreteras"});
-        var overlays = {"Carreteras": Carreteras, "SUELO": SUELO, "BASE2": BASE2};			
-        var baseLayers = {"OSGEO": openStreet,"PNOA": PNOA, "RASTER": RASTER, "BASE": BASE};
+        var BaseIGN2 = L.tileLayer.wms("https://www.ign.es/wms-inspire/ign-base?SERVICE=WMS&",{layers:'IGNBaseTodo-nofondo', format: 
+        'image/jpeg',transparent: true, attribution: "BaseIGN2"});
+        
+        var overlays = {"Carreteras": Carreteras, "Suelo": Suelo, "Tramo Vial": TramoVial, "Catastro": Catastro, "Edificios": Edificios};			
+        var baseLayers = {"openStreet": openStreet,"PNOA": PNOA, "RASTER": RASTER, "BaseIGN": BaseIGN, "Limites": Limites,
+                        "Comunidades": Comunidades,"Provincias": Provincias,"Municipios": Municipios, "Cambios 06-12": Cambios};
         L.control.layers(baseLayers,overlays).addTo(map);
 
         var sidebar = L.control.sidebar('sidebar').addTo(map);
