@@ -5,6 +5,7 @@ Este código corresponde a mi visualizador web desarrollado para el Proyecto fin
 
 Este visualizador, consume un Servicios WMS local implementado utilizando Geoserver, además de otros servicios WMS de entidades como IDEE, IGN y el Catastro de España. 
 
-Se utiliza la librería Leaflet de JavaScript y algunos de sus plugins para funcionesc como marcar coordendas geográficas, medir distancias entre dos puntos y sobreponer capas de mapas. 
+Se utiliza la librería Leaflet de JavaScript y algunos de sus plugins para funciones como marcar posiciones de coordenadas geográficas, medir distancias entre dos puntos y sobreponer capas de mapas. 
+
 Además, se utiliza Cesium para ofrecer un vista 3D del campus. 
 
